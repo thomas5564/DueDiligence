@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ ticker }} Details</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles2.css' %}">
+</head>
+<body>
+    <h1>{{ ticker }}'s Competition</h1>
+    <img width =1200px src="{% url 'pc' %}" alt="Stock info">
+    <table>
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Operating Margins</th>
+                <th>Price-to-Sales (P/S)</th>
+                <th>Revenue</th>
+                <th>1-Year Growth</th>
+                <th>3-Year Growth</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+                <tr onclick="window.location.href='{% url 'details' item.Ticker %}'" style="cursor: pointer;">
+                    <td>{{ item.Ticker }}</td>
+                    <td>{{ item.operating_margins }}</td>
+                    <td>{{ item.ps }} </td>
+                    <td>{{ item.revenue }}</td>
+                    <td>{{ item.1YearGrowth }} </td>
+                    <td>{{ item.3YearGrowth }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="/">Back to Tickers</a>
+</body>
+</html>

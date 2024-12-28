@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DueDiligence</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <h1>DueDiligence</h1>
+    </nav>
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="text" 
+            name="url" 
+            placeholder="{% if ScrapeMode %}
+            Enter URL to scrape
+            {% else %}
+            Enter Ticker to Add
+            {% endif %}"
+             required>
+            <button type="submit" padding = 20px>
+                {% if ScrapeMode %}
+                    Scrape
+                {% else %}
+                    Add
+                {% endif %}
+            </button>
+        </form>
+        {% if not ScrapeMode %}
+            <form method="POST" action="">
+                {% csrf_token %}
+                <button type="submit" name="dd">DueDiligence</button>
+            </form>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <button type="submit" name="clear">Clear Tickers</button>
+            </form>
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <button name="ScrapeMode" type="submit">
+                {% if ScrapeMode %}
+                    Activate TickerMode
+                {% else %}
+                    Activate ScrapeMode
+                {% endif %}
+            </button>
+        </form>
+        
+        {% if tickers %}
+        <h3>Tickers Found:</h3>
+        <ul>
+            {% for ticker in tickers %}
+            <form method="POST" action="">
+                <li class="{% if forloop.counter|divisibleby:3 %}blue{% elif forloop.counter|divisibleby:2 %}purple{% else %}pink{% endif %}">
+                    {{ ticker }}
+                </li>
+            </form>
+            {% endfor %}
+        </ul>
+        
+        {% else %}
+            <p>No tickers found or URL not provided.</p>
+        {% endif %}
+    </div>
+    
+    <div>
+        <h1>Financial Data</h1>
+        {% if data %}
+        <p>Click on a row to look at the company's competition</p>
+        {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th>Change in Retained Earnings</th>
+                    <th>Cash-to-Debt Difference</th>
+                    <th>Debt-to-Equity Ratio</th>
+                    <th>Preferred Stock Equity Exists</th>
+                    <th>Buyback Detected</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    {% for ticker, metrics in item.items %}    
+                        <tr onclick="window.location.href='{% url 'details' ticker %}'" style="cursor: pointer;">            
+                            <td>{{ ticker }}</td>
+                            <td class="{% if metrics.Change_in_Retained_Earnings > 0.8 %}green{% else %}red{% endif %}">{{ metrics.Change_in_Retained_Earnings }}</td>
+                            <td class="{% if metrics.Cash_to_Debt_difference > 0 %}green{% else %}red{% endif %}">{{ metrics.Cash_to_Debt_difference }}</td>
+                            <td class="{% if metrics.Debt_to_Equity_Ratio < 0.8 %}green{% else %}red{% endif %}">{{ metrics.Debt_to_Equity_Ratio }}</td>
+                            <td class="{% if metrics.Preferred_Stock_Equity_Exists %}green{% else %}red{% endif %}">{{ metrics.Preferred_Stock_Equity_Exists }}</td>
+                            <td class="{% if metrics.Buyback_Detected %}green{% else %}red{% endif %}">{{ metrics.Buyback_Detected }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

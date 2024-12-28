@@ -1,0 +1,150 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.green {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    font-weight: bold;
+}
+
+.red {
+    background-color: #f44336; /* Red */
+    color: white;
+    font-weight: bold;
+}
+
+nav h1 {
+    margin: 0;
+    font-size: 2.5rem; /* Slightly larger for emphasis */
+    font-family: 'Poppins', sans-serif; /* A modern, clean font */
+    color: #FFFFFF
+    ; /* A standout color for the header */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+    letter-spacing: 2px; /* Spreads out the text slightly */
+}
+
+
+div {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin-bottom: 15px;
+}
+
+input[type="text"] {
+    width: calc(100% - 110px);
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #003d80;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+h1, h3 {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    background-color: #f8f9fa;
+    font-size: 1rem;
+}
+
+/* Enlarge table row on hover */
+tbody tr {
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+tbody tr:hover {
+    transform: scale(1.02); /* Slightly enlarge the row */
+    background-color: #f1f1f1; /* Light gray background */
+}
+.pink {
+    background-color: #ffc0cb; /* Pink */
+    color: black;
+}
+
+.purple {
+    background-color: #6a0dad; /* Purple */
+    color: white;
+}
+
+.blue {
+    background-color: #007bff; /* Blue */
+    color: white;
+}
+
+ul li {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    list-style-type: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

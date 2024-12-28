@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results for {{ ticker }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Financial Metrics for {{ ticker }}</h1>
+        {% if metrics %}
+        <ul>
+            <li><strong>Change in Retained Earnings:</strong> {{ metrics['Change in Retained Earnings'] }}</li>
+            <li><strong>Cash-to-Debt Ratio:</strong> {{ metrics['Cash-to-Debt Ratio'] }}</li>
+            <li><strong>Debt-to-Equity Ratio:</strong> {{ metrics['Debt-to-Equity Ratio'] }}</li>
+            <li><strong>Preferred Stock Equity Exists:</strong> {{ metrics['Preferred Stock Equity Exists'] }}</li>
+            <li><strong>Buyback Detected:</strong> {{ metrics['Buyback Detected'] }}</li>
+        </ul>
+        {% else %}
+        <p>No financial data found for ticker "{{ ticker }}".</p>
+        {% endif %}
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

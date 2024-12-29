@@ -93,8 +93,9 @@
                             <td>{{ ticker }}</td>
                             <td class="{% if metrics.Change_in_Retained_Earnings > 0.8 %}green{% else %}red{% endif %}">{{ metrics.Change_in_Retained_Earnings }}</td>
                             <td class="{% if metrics.Cash_to_Debt_difference > 0 %}green{% else %}red{% endif %}">{{ metrics.Cash_to_Debt_difference }}</td>
-                            <td class="{% if metrics.Debt_to_Equity_Ratio < 0.8 %}green{% else %}red{% endif %}">{{ metrics.Debt_to_Equity_Ratio }}</td>
-                            <td class="{% if metrics.Preferred_Stock_Equity_Exists %}green{% else %}red{% endif %}">{{ metrics.Preferred_Stock_Equity_Exists }}</td>
+                            <td class="{% if metrics.Debt_to_Equity_Ratio > 0 and metrics.Debt_to_Equity_Ratio < 0.8 %}
+                                green{% else %}red{% endif %}">{{ metrics.Debt_to_Equity_Ratio }}</td>
+                            <td class="{% if metrics.Preferred_Stock_Equity_Exists %}red{% else %}green{% endif %}">{{ metrics.Preferred_Stock_Equity_Exists }}</td>
                             <td class="{% if metrics.Buyback_Detected %}green{% else %}red{% endif %}">{{ metrics.Buyback_Detected }}</td>
                         </tr>
                     {% endfor %}

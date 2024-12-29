@@ -6,7 +6,18 @@ from io import BytesIO
 
 matplotlib.use('Agg')  # Use a non-interactive backend
 
-
+def readable(i):
+    """Convert large numbers to human-readable format."""
+    if i >= 1e12:
+        return f"{round(i / 1e12, 1)}T"
+    elif i >= 1e9:
+        return f"{round(i / 1e9, 1)}B"
+    elif i >= 1e6:
+        return f"{round(i / 1e6, 1)}M"
+    elif i >= 1e3:
+        return f"{round(i / 1e3, 1)}k"
+    else:
+        return str(i)
 
 
 def plot_price_to_sales(ax, data, highlight_ticker):
@@ -81,28 +92,16 @@ def plot_operating_margins(ax, data, highlight_ticker):
     
     # Customize x-axis labels
     ax.set_xticks(range(len(tickers)))
-    ax.set_xticklabels([f"{ticker}\n{margin:.2f}%" for ticker, margin in zip(tickers, margins)], rotation=0)
+    ax.set_xticklabels([f"{ticker}\n{round(margin)}%" for ticker, margin in zip(tickers, margins)], rotation=0)
     
     # Labels and title
     ax.set_xlabel('Tickers and Operating Margins')
     ax.set_ylabel('Operating Margin (%)')
     ax.set_title('Operating Margins of Companies')
 
-import matplotlib.pyplot as plt
-
+    
 def plot_rev(ax, data, highlight):
-    def readable(i):
-        """Convert large numbers to human-readable format."""
-        if i >= 1e12:
-            return f"{round(i / 1e12, 1)}T"
-        elif i >= 1e9:
-            return f"{round(i / 1e9, 1)}B"
-        elif i >= 1e6:
-            return f"{round(i / 1e6, 1)}M"
-        elif i >= 1e3:
-            return f"{round(i / 1e3, 1)}k"
-        else:
-            return str(i)
+
 
     # Filter out data without revenue and process values
     clean = [item for item in data if item.get('revenue') is not None]

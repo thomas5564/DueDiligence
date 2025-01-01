@@ -35,7 +35,7 @@ def index(request):
                     })
             else:
                 tickers = request.session['tickers']
-                CurrentTicker = request.POST.get('url')
+                CurrentTicker = request.POST.get('url').upper()
                 if CurrentTicker not in tickers:
                     tickers.append(CurrentTicker)
                 request.session['tickers'] = tickers
@@ -78,11 +78,14 @@ def details(request, ticker):
     competitors = scrape(link)
     basket = sample(competitors,ticker)
     data = tabulate(basket)
+    deetslink = f"https://finviz.com/quote.ashx?t={ticker}&ty=c&p=d&b=1"
 
     context = {
         'ticker': ticker,
         'details': f"Details about {ticker}",
         'data':data,
+        'screen':screen,
+        'link':deetslink
     }
 
     request.session['shared_data'] = data

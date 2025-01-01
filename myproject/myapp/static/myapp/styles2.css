@@ -62,7 +62,7 @@ table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-a {
+.return {
     display: block;
     width: 200px;
     text-align: center;
@@ -76,6 +76,7 @@ a {
     transition: background-color 0.3s ease;
 }
 
-a:hover {
+.return :hover {
     background-color: #003bb3;
 }
+

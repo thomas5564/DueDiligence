@@ -10,6 +10,15 @@
 </head>
 <body>
     <h1>{{ ticker }}'s Competition</h1>
+    <div>
+        <h2>Companies similar to {{ ticker }}</h2>
+        <ul>
+            <li>Market Cap: {{ screen.0 }}</li>
+            <li>Sector: {{ screen.1 }}</li>
+            <li>Industry: {{ screen.2 }}</li>
+        </ul>
+        <a href="{{ link }}" target="_blank" rel="noopener noreferrer">find out more here</a>
+    </div>
     <img width =1200px src="{% url 'pc' %}" alt="Stock info">
     <table>
         <thead>
@@ -20,6 +29,7 @@
                 <th>Revenue</th>
                 <th>1-Year Growth</th>
                 <th>3-Year Growth</th>
+                <th>Market Cap</th>
             </tr>
         </thead>
         <tbody>
@@ -31,11 +41,12 @@
                     <td>{{ item.revenue }}</td>
                     <td>{{ item.1YearGrowth }} </td>
                     <td>{{ item.3YearGrowth }} </td>
+                    <td>{{ item.mc }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     
-    <a href="/">Back to Tickers</a>
+    <a class="return" href="/">Back to Tickers</a>
 </body>
 </html>

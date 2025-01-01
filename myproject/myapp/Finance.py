@@ -3,7 +3,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from urllib.parse import urlencode
 
-
+def readable(i):
+    """Convert large numbers to human-readable format."""
+    if i >= 1e12:
+        return f"{round(i / 1e12, 1)}T"
+    elif i >= 1e9:
+        return f"{round(i / 1e9, 1)}B"
+    elif i >= 1e6:
+        return f"{round(i / 1e6, 1)}M"
+    elif i >= 1e3:
+        return f"{round(i / 1e3, 1)}k"
+    else:
+        return str(i)
 
 def create_ticker_dict(ticker, change_in_retained, cash_to_debt, debt_to_equity, prefstock, buyback):
     return {
@@ -200,7 +211,6 @@ def construct_finviz_url(filters,view_mode = 111):
 
 
 def sample(tl, ticker):
-    print("adnkafka")
     print(tl)
     def getIndex(l, ticker):
         # Find the index of the ticker in the list
@@ -343,13 +353,15 @@ def tabulate(tickers):
 
     data=[]
     for ticker, metric_value in om.items():
+        mc = yf.Ticker(ticker).info.get('marketCap')  # Market capitalization
         data.append({
             'Ticker': ticker,
             'operating_margins': metric_value,
             'ps':ps[ticker],
             'revenue':r[ticker],
             '1YearGrowth': growth[ticker]['1_year_growth'],
-            '3YearGrowth': growth[ticker]['3_year_growth']
+            '3YearGrowth': growth[ticker]['3_year_growth'],
+            'mc' : readable(mc)
         })
     return data
 
